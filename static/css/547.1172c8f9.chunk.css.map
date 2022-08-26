@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/547.1172c8f9.chunk.css","mappings":"AAAA,oBACI,UACJ,CAEA,0BACI,eAAiB,CACjB,WACJ,CAEA,sBACI,WACJ","sources":["components/Users/Users.module.css"],"sourcesContent":[".photo {\r\n    width: 60px;\r\n}\r\n\r\n.currentBold {\r\n    font-weight: bold;\r\n    padding: 3px;\r\n}\r\n\r\n.current{\r\n    padding: 1px;\r\n}"],"names":[],"sourceRoot":""}
