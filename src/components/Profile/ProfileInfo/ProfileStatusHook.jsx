@@ -32,7 +32,7 @@ const ProfileStatusHook = (props) => {
                 <div>
                     <input autoFocus={true} onBlur={deActivateEditMode} onChange={onStatusChange} value={status} />
                 </div> :
-                <span onDoubleClick={(props.profile.userId == props.authId)
+                <span onDoubleClick={(props.profile.userId === props.authId)
                     ? activateEditMode
                     :""} >
                     {props.status || "У меня нет статуса"}
