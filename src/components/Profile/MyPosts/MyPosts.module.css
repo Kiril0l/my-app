@@ -1,0 +1,9 @@
+.content{
+    grid-area: c;
+    background-color: darkcyan;
+    padding: 10px;
+}
+
+.item {
+    color: antiquewhite;
+}

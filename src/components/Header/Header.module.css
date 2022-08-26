@@ -1,0 +1,20 @@
+.header{
+    grid-area: h;
+    background-color: aquamarine;
+}
+.header img{
+    width: 75px;
+}
+
+.headerText{
+    float: right;
+}
+
+.headerText a{
+    color: grey;
+}
+
+.errorText{
+    color: red;
+    text-transform: uppercase;
+}

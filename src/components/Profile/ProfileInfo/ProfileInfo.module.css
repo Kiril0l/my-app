@@ -1,0 +1,13 @@
+.messageImg {
+    grid-area: i;
+}
+
+.textStyle{
+    padding: 10px;
+    color: wheat;
+    text-transform: capitalize;
+}
+
+.photo {
+    width: 260px;
+}

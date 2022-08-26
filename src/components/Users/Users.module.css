@@ -1,0 +1,12 @@
+.photo {
+    width: 60px;
+}
+
+.currentBold {
+    font-weight: bold;
+    padding: 3px;
+}
+
+.current{
+    padding: 1px;
+}

@@ -1,0 +1,35 @@
+.content{
+    grid-area: c;
+    background-color: darkcyan;
+}
+
+.item {
+    display: grid;
+    grid-template-areas:
+            "i a"
+            "i t"
+            "i l";
+    grid-template-rows: 20px 3fr;
+    grid-template-columns: 1fr 15fr;
+}
+
+.item img {
+    width: 60px;
+}
+
+.messageImg {
+    grid-area: i;
+    padding: 1px;
+}
+.messageText{
+    grid-area: t;
+    color: rgb(0, 0, 0);
+}
+.messageAuthor{
+    grid-area: a;
+    color: Gold;
+}
+.messageLikes{
+    grid-area: l;
+    color: rgb(255, 0, 0);
+}

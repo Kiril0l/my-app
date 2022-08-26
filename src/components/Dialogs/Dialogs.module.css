@@ -1,0 +1,17 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+
+
+.messages{
+    color: black;
+    padding: 10px;
+}
+
+.navlinkname{
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}

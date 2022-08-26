@@ -1,0 +1,13 @@
+.main-area {
+    display: grid;
+    grid-template-areas:
+            "h h"
+            "n c";
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 2fr 10fr;
+}
+
+.main-area-content{
+    grid-area: c;
+    background-color: darkcyan;
+}
