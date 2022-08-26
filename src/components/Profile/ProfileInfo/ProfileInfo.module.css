@@ -11,3 +11,8 @@
 .photo {
     width: 260px;
 }
+
+.errorTetx {
+    color: maroon;
+    padding: 10px;
+}

@@ -4,7 +4,8 @@ const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_USER_SATUS = 'SET_USER_SATUS'
-
+const SET_USER_PHOTO = 'SET_USER_PHOTO'
+const SAVE_ERROR = 'SAVE_ERROR'
 
 let startState = {
     posts: [
@@ -15,6 +16,7 @@ let startState = {
     newPostText: '',
     profile: null,
     status: "",
+    error: "",
 }
 
 const profileReducer = (state = startState, action) => {
@@ -48,13 +50,26 @@ const profileReducer = (state = startState, action) => {
         case SET_USER_PROFILE: {
             return {
                 ...state,
-                profile: action.profile
+                profile: action.profile,
+                error: ""
             }
         }
         case SET_USER_SATUS: {
             return {
                 ...state,
                 status: action.status
+            }
+        }
+        case SET_USER_PHOTO: {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}             
+            }
+        }
+        case SAVE_ERROR: {
+            return {
+                ...state,
+                error: action.errorText             
             }
         }
         default:
@@ -69,6 +84,8 @@ export const updateNewPostTextActionCreater = (text) =>
     ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setUserStatus = (status) => ({ type: SET_USER_SATUS, status })
+export const savePhotoSuccess = (photos) => ({ type: SET_USER_PHOTO, photos })
+export const saveError = (errorText) => ({ type: SAVE_ERROR, errorText })
 
 
 export const getUserProfileThunkCreator = (userId) => {
@@ -93,5 +110,17 @@ export const updateUserStatusThunkCreator = (status) => {
         }
     }
 }
+
+export const savePhotoThunkCreator = (photoFile) => {
+    return async (dispatch) => {
+        const data = await userAPI.savePhoto(photoFile)
+        if (data.resultCode === 0) {
+            dispatch(savePhotoSuccess(data.data.photos))
+        }
+        else dispatch(saveError(data.messages[0]))
+    }
+}
+
+
 
 export default profileReducer

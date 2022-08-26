@@ -26,13 +26,14 @@ const ProfileStatusHook = (props) => {
         setStatus(e.currentTarget.value)
     }
 
+    const isOwner = props.profile.userId == props.authId
     return (
         <div>
             {(editMode ?
                 <div>
                     <input autoFocus={true} onBlur={deActivateEditMode} onChange={onStatusChange} value={status} />
                 </div> :
-                <span onDoubleClick={(props.profile.userId === props.authId)
+                <span onDoubleClick={(isOwner)
                     ? activateEditMode
                     :""} >
                     {props.status || "У меня нет статуса"}
