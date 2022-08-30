@@ -126,7 +126,6 @@ export const updateDataProfileThunkCreator = (values) => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId
         const data = await userAPI.updateDataProfile(values)
-        console.log(data.resultCode)
         if (data.resultCode === 0) {
             dispatch(getUserProfileThunkCreator(userId))
         }

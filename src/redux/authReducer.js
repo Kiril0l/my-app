@@ -63,7 +63,6 @@ export const logInThunkCreator = (email, password, rememberMe, setStatus, setSub
 export const logOutThunkCreator = () => {
     return async (dispatch) => {
         let response = await authAPI.logOutUser()
-        console.log(response.data)
         if (response.data.resultCode === 0) {
             dispatch(setAuthData(null, null, null, false))
         }
