@@ -2,6 +2,11 @@
     grid-area: i;
 }
 
+.profileName{
+    color: rgb(244, 166, 10);
+    font-size: 35px;
+}
+
 .textStyle{
     padding: 10px;
     color: wheat;
@@ -9,10 +14,16 @@
 }
 
 .photo {
+    padding-top: 10px;
     width: 260px;
 }
 
 .errorTetx {
     color: maroon;
     padding: 10px;
+}
+
+.listContacts{
+    padding-left: 20px;
+    color:rgb(244, 232, 10)
 }

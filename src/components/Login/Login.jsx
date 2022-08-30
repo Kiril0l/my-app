@@ -15,19 +15,20 @@ const Login = (props) => {
 
     const validationShema = yup.object().shape({
         email: yup.string().typeError('Должно быть строкой').required("обязательное поле"),
-        password: yup.string().typeError('Должно быть строкой').required("обязательное поле")
+        password: yup.string().typeError('Должно быть строкой').required("обязательное поле"),
     })
 
     return <Formik
         initialValues={{
             email: '',
             password: '',
-            remembrMe: false
+            remembrMe: false,
+            // captcha: null
         }}
         validateOnBlur
         onSubmit={(values, onSubmitProps) => {
             props.logInThunkCreator(values.email, values.password,
-                values.remembrMe, onSubmitProps.setStatus, onSubmitProps.setSubmitting)
+                values.remembrMe, onSubmitProps.setStatus, onSubmitProps.setSubmitting, values.captcha)
             onSubmitProps.setSubmitting(true)
         }}
         validationSchema={validationShema}
@@ -73,6 +74,19 @@ const Login = (props) => {
                         component={'input'}
                     />
                 </p>
+                <div>
+                    {props.captcha && <img src={props.captcha} />}
+                    <div>
+                    {props.captcha && <Field
+                        placeholder={'Please validate captcha'}
+                        type={"text"}
+                        name={'captcha'}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.captcha}
+                    />}
+                    </div>
+                </div>
                 <button
                     disabled={isSubmitting}
                     onClick={handleSubmit}
@@ -85,7 +99,8 @@ const Login = (props) => {
 
 }
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captchaUrl
 })
 export default connect(mapStateToProps, { logInThunkCreator })(Login)
 

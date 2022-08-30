@@ -26,7 +26,11 @@ export const userAPI = {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }} ).then(response => response.data)
+    },
+    updateDataProfile (values) {
+        return instance.put(`profile`, values).then(response => response.data)
     }
+    
 }
 
 export const followAPI = {
@@ -42,10 +46,16 @@ export const authAPI = {
     getAuthLogin () {
         return instance.get(`auth/me`).then(response => response.data)
     },
-    logInUser (email, password, rememberMe = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
+    logInUser (email, password, rememberMe = false, captcha = null) {
+        return instance.post(`auth/login`, {email, password, rememberMe, captcha})
     },
     logOutUser () {
         return instance.delete(`auth/login`)
     }
+}
+
+export const captchaAPI = {
+    getCaptchaUrl () {
+        return instance.get(`security/get-captcha-url`).then(response => response.data)
+    },
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator, savePhotoThunkCreator } from '../../redux/profileReducer'
+import { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator, savePhotoThunkCreator, updateDataProfileThunkCreator } from '../../redux/profileReducer'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { WithAuthContainer } from '../../hoc/withAuthContainer';
 import { compose } from 'redux';
@@ -36,6 +36,7 @@ class ProfileAPIContainer extends React.Component {
                     updateStatus={this.props.updateUserStatusThunkCreator}
                     authId={this.props.authId} 
                     savePhoto={this.props.savePhotoThunkCreator}
+                    updateDataProfile={this.props.updateDataProfileThunkCreator}
                     error={this.props.error}/>
             </div>
         </div>
@@ -63,7 +64,7 @@ function withRouter(Component) {
 }
 
 export default compose(
-    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator, savePhotoThunkCreator }),
+    connect(mapStateToProps, { getUserProfileThunkCreator, getUserStatusThunkCreator, updateUserStatusThunkCreator, savePhotoThunkCreator, updateDataProfileThunkCreator}),
     withRouter,
     WithAuthContainer,
 )(ProfileAPIContainer)

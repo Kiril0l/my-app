@@ -7,6 +7,7 @@ const SET_USER_SATUS = 'SET_USER_SATUS'
 const SET_USER_PHOTO = 'SET_USER_PHOTO'
 const SAVE_ERROR = 'SAVE_ERROR'
 
+
 let startState = {
     posts: [
         { id: 1, message: 'Hi', author: 'Kirill Zuzin', like: '5' },
@@ -120,6 +121,22 @@ export const savePhotoThunkCreator = (photoFile) => {
         else dispatch(saveError(data.messages[0]))
     }
 }
+
+export const updateDataProfileThunkCreator = (values) => {
+    return async (dispatch, getState) => {
+        const userId = getState().auth.userId
+        const data = await userAPI.updateDataProfile(values)
+        console.log(data.resultCode)
+        if (data.resultCode === 0) {
+            dispatch(getUserProfileThunkCreator(userId))
+        }
+        else {
+            dispatch(saveError(data.messages[0]))
+            return Promise.reject(data.messages[0])}
+    }
+}
+
+
 
 
 

@@ -1,6 +1,7 @@
-import { authAPI } from "../api/api"
+import { authAPI, captchaAPI } from "../api/api"
 
 const SET_AUTH_DATA = 'SET_AUTH_DATA'
+const SET_CAPTCHA_URL = 'SET_CAPTCHA_URL'
 
 
 let startState = {
@@ -9,6 +10,7 @@ let startState = {
     login: null,
     isAuth: false,
     isLoading: false,
+    captchaUrl: null,
 }
 
 const authReducer = (state = startState, action) => {
@@ -18,6 +20,11 @@ const authReducer = (state = startState, action) => {
                 ...state,
                 ...action.data,
             }
+        case SET_CAPTCHA_URL:
+            return {
+                ...state,
+                captchaUrl: action.captcha,
+            }
         default:
             return state
     }
@@ -25,6 +32,7 @@ const authReducer = (state = startState, action) => {
 
 // наши ActionCreator:
 export const setAuthData = (userId, email, login, isAuth) => ({ type: SET_AUTH_DATA, data: { userId, email, login, isAuth } })
+export const setCaptchaUrl = (captcha) => ({ type: SET_CAPTCHA_URL, captcha })
 
 export const getLogonThunkCreator = () => {
     return async (dispatch) => {
@@ -36,12 +44,16 @@ export const getLogonThunkCreator = () => {
     }
 }
 
-export const logInThunkCreator = (email, password, rememberMe, setStatus, setSubmitting) => {
+export const logInThunkCreator = (email, password, rememberMe, setStatus, setSubmitting, captcha) => {
     return async (dispatch) => {
-        let response = await authAPI.logInUser(email, password, rememberMe)
+        let response = await authAPI.logInUser(email, password, rememberMe, captcha)
         if (response.data.resultCode === 0) {
             dispatch(getLogonThunkCreator())
         } else {
+            if (response.data.resultCode === 10) {
+                const captchaUrl = await captchaAPI.getCaptchaUrl()
+                dispatch(setCaptchaUrl(captchaUrl.url))
+            }
             setStatus(response.data.messages)
         }
         setSubmitting(false)
